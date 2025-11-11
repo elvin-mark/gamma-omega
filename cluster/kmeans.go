@@ -6,7 +6,7 @@ import (
 )
 
 func KMeans(points []data.Vector, n int) (u []data.Vector, clusters []int) {
-	utils.Assert(len(points) <= n, "number of clusters cannot be greater than the number of points")
+	utils.Assert(n <= len(points), "number of clusters cannot be greater than the number of points")
 	u = make([]data.Vector, n)
 	clusters = make([]int, len(points))
 	for i := range n {

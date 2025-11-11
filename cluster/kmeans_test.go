@@ -29,7 +29,7 @@ func TestKMeans(t *testing.T) {
 	expectedClusters := []int{0, 0, 0, 1, 1, 1, 2, 2, 2, 2}
 	for i := range clusters {
 		if clusters[i] != expectedClusters[i] {
-			panic("did not converge")
+			t.Error("did not converge")
 		}
 	}
 }

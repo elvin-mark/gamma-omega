@@ -22,7 +22,7 @@ func TestNewton(t *testing.T) {
 	fmt.Println(x)
 	fmt.Println(f(x))
 	if math.Abs(f(x)) > utils.EPSILON {
-		panic("did not converge")
+		t.Error("did not converge")
 	}
 }
 
@@ -50,6 +50,6 @@ func TestGeneralizedNewton(t *testing.T) {
 	fmt.Println(x)
 	fmt.Println(f2d(x))
 	if f2d(x).Norm() > utils.EPSILON {
-		panic("did not converge")
+		t.Error("did not converge")
 	}
 }

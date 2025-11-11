@@ -18,7 +18,7 @@ func TestRungeKutta(t *testing.T) {
 		println(y[i])
 	}
 	if math.Abs(y[99]-math.Exp(1)) > 0.1 {
-		panic("did not converge")
+		t.Error("did not converge")
 	}
 }
 
@@ -35,9 +35,9 @@ func TestGeneralizedRungeKutta(t *testing.T) {
 		println(y[i].Data[0], y[i].Data[1])
 	}
 	if math.Abs(y[99].Data[0]-math.Cos(1)) > 0.1 {
-		panic("did not converge")
+		t.Error("did not converge")
 	}
 	if math.Abs(-y[99].Data[1]-math.Sin(1)) > 0.1 {
-		panic("did not converge")
+		t.Error("did not converge")
 	}
 }

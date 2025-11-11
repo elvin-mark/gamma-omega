@@ -17,6 +17,6 @@ func TestSecant(t *testing.T) {
 	fmt.Println(x)
 	fmt.Println(f(x))
 	if math.Abs(f(x)) > utils.EPSILON {
-		panic("did not converge")
+		t.Error("did not converge")
 	}
 }
