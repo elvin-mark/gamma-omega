@@ -29,7 +29,15 @@ func (v Vector) Zeros() {
 	}
 }
 
-func (v Vector) Scale(s float64) {
+func (v Vector) Scale(s float64) Vector {
+	res := NewVector(v.Dim)
+	for i := range v.Dim {
+		res.Data[i] = v.Data[i] * s
+	}
+	return res
+}
+
+func (v Vector) ScaleInplace(s float64) {
 	for i := range v.Dim {
 		v.Data[i] *= s
 	}

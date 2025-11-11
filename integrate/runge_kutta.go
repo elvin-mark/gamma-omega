@@ -22,28 +22,12 @@ func GeneralizedRungeKutta(dydt func(float64, data.Vector) data.Vector, y0 data.
 	for i := 1; i < len(t); i++ {
 		h := t[i] - t[i-1]
 
-		k1 := dydt(t[i-1], y[i-1])
-		k1.Scale(h)
+		k1 := dydt(t[i-1], y[i-1]).Scale(h)
+		k2 := dydt(t[i-1]+h/2, y[i-1].Add(k1.Scale(h/2.0))).Scale(h)
+		k3 := dydt(t[i-1]+h/2, y[i-1].Add(k2.Scale(h/2.0))).Scale(h)
+		k4 := dydt(t[i-1]+h, y[i-1].Add(k3.Scale(h))).Scale(h)
 
-		tmp := k1.Clone()
-		tmp.Scale(h / 2.0)
-		k2 := dydt(t[i-1]+h/2, y[i-1].Add(tmp))
-		k2.Scale(h)
-
-		tmp = k2.Clone()
-		tmp.Scale(h / 2.0)
-		k3 := dydt(t[i-1]+h/2, y[i-1].Add(tmp))
-		k3.Scale(h)
-
-		tmp = k3.Clone()
-		tmp.Scale(h)
-		k4 := dydt(t[i-1]+h, y[i-1].Add(tmp))
-		k4.Scale(h)
-
-		k2.Scale(2)
-		k3.Scale(2)
-		tmp = k1.Add(k2).Add(k3).Add(k4)
-		tmp.Scale(1 / 6.0)
+		tmp := k1.Add(k2.Scale(2)).Add(k3.Scale(2)).Add(k4).Scale(1 / 6.0)
 		y[i] = y[i-1].Add(tmp)
 	}
 	return y

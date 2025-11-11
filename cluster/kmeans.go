@@ -33,7 +33,7 @@ func KMeans(points []data.Vector, n int) (u []data.Vector, clusters []int) {
 					count++
 				}
 			}
-			u[k].Scale(1.0 / float64(count))
+			u[k].ScaleInplace(1.0 / float64(count))
 		}
 	}
 	return u, clusters
