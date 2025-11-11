@@ -6,10 +6,7 @@ import (
 )
 
 func isSimilar(a, b float64) bool {
-	if math.Abs(a-b) > 1e-6 {
-		return false
-	}
-	return true
+	return math.Abs(a-b) <= 1e-6
 }
 
 func isMatrixSimilar(a, b Matrix) bool {
